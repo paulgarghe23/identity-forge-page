@@ -35,45 +35,45 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="py-24 bg-secondary">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Featured Projects</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+    <section id="projects" className="py-32 bg-secondary">
+      <div className="container mx-auto px-6 max-w-7xl">
+        <div className="text-center mb-20 animate-fade-in">
+          <h2 className="text-5xl md:text-6xl font-serif font-semibold mb-6 text-foreground">Featured Projects</h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             A showcase of my recent work and creative endeavors
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-10">
           {projects.map((project, index) => (
             <Card
               key={index}
-              className="border-none shadow-lift hover:shadow-glow transition-smooth hover:-translate-y-2 group"
+              className="border border-border/50 shadow-elegant hover:shadow-lift transition-smooth hover:-translate-y-1 group bg-card"
             >
-              <CardHeader>
-                <CardTitle className="text-2xl group-hover:text-accent transition-smooth">
+              <CardHeader className="pb-4 pt-8 px-8">
+                <CardTitle className="text-2xl font-serif font-semibold group-hover:text-accent transition-smooth mb-3">
                   {project.title}
                 </CardTitle>
-                <CardDescription className="text-base">
+                <CardDescription className="text-base text-muted-foreground leading-relaxed">
                   {project.description}
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2 mb-4">
+              <CardContent className="px-8 pb-8">
+                <div className="flex flex-wrap gap-2 mb-6">
                   {project.tags.map((tag, tagIndex) => (
                     <span
                       key={tagIndex}
-                      className="px-3 py-1 text-sm rounded-full bg-secondary text-secondary-foreground"
+                      className="px-3 py-1 text-sm rounded-full bg-secondary text-secondary-foreground border border-border/50"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
                 <div className="flex gap-3">
-                  <Button variant="outline" size="sm" className="gap-2">
+                  <Button variant="outline" size="sm" className="gap-2 hover:bg-accent/10">
                     <ExternalLink size={16} /> View Project
                   </Button>
-                  <Button variant="outline" size="sm" className="gap-2">
+                  <Button variant="outline" size="sm" className="gap-2 hover:bg-accent/10">
                     <Github size={16} /> Code
                   </Button>
                 </div>

@@ -21,34 +21,34 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-24 bg-secondary">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">About Me</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+    <section id="about" className="py-32 bg-secondary">
+      <div className="container mx-auto px-6 max-w-7xl">
+        <div className="text-center mb-20 animate-fade-in">
+          <h2 className="text-5xl md:text-6xl font-serif font-semibold mb-6 text-foreground">About Me</h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Driven by curiosity and fueled by creativity, I transform ideas into reality
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
+        <div className="grid md:grid-cols-3 gap-10 mb-20">
           {features.map((feature, index) => (
             <Card
               key={index}
-              className="border-none shadow-lift hover:shadow-glow transition-smooth hover:-translate-y-2"
+              className="border border-border/50 shadow-elegant hover:shadow-lift transition-smooth hover:-translate-y-1 bg-card"
             >
-              <CardContent className="pt-6">
-                <div className="w-12 h-12 rounded-lg gradient-accent flex items-center justify-center mb-4">
-                  <feature.icon className="text-white" size={24} />
+              <CardContent className="pt-8 pb-8 px-6">
+                <div className="w-14 h-14 rounded-lg bg-primary flex items-center justify-center mb-5">
+                  <feature.icon className="text-primary-foreground" size={22} />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-muted-foreground">{feature.description}</p>
+                <h3 className="text-xl font-serif font-semibold mb-3 text-foreground">{feature.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
               </CardContent>
             </Card>
           ))}
         </div>
 
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-lg text-muted-foreground leading-relaxed">
+          <p className="text-lg text-muted-foreground leading-loose">
             With years of experience in the digital landscape, I've had the privilege of working
             on diverse projects that challenge conventional thinking. My journey has been defined
             by continuous learning, collaboration, and a commitment to excellence. I believe in

@@ -27,24 +27,29 @@ const Navbar = () => {
         isScrolled ? "bg-background/95 backdrop-blur-md shadow-md" : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-6 py-4">
+      <div className="container mx-auto px-6 py-5">
         <div className="flex items-center justify-between">
-          <a href="#hero" className="text-2xl font-bold gradient-primary bg-clip-text text-transparent">
-            Portfolio
+          <a href="#hero" className="flex items-center gap-3 group">
+            <div className="w-10 h-10 rounded-lg border-2 border-primary flex items-center justify-center group-hover:border-accent transition-smooth">
+              <span className="text-lg font-serif font-semibold text-primary group-hover:text-accent transition-smooth">YN</span>
+            </div>
+            <span className="text-lg font-serif font-semibold text-foreground hidden sm:block">Your Name</span>
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-10">
             {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className="text-foreground hover:text-accent transition-smooth font-medium"
+                className="text-sm text-muted-foreground hover:text-foreground transition-smooth font-medium tracking-wide"
               >
                 {item.label}
               </a>
             ))}
-            <Button className="gradient-accent">Get in Touch</Button>
+            <Button className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-elegant">
+              Get in Touch
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -59,18 +64,20 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 flex flex-col gap-4">
+          <div className="md:hidden mt-6 pb-4 flex flex-col gap-4">
             {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className="text-foreground hover:text-accent transition-smooth font-medium py-2"
+                className="text-sm text-muted-foreground hover:text-foreground transition-smooth font-medium py-2 tracking-wide"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.label}
               </a>
             ))}
-            <Button className="gradient-accent w-full">Get in Touch</Button>
+            <Button className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-elegant w-full mt-2">
+              Get in Touch
+            </Button>
           </div>
         )}
       </div>
