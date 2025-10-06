@@ -32,7 +32,7 @@ const Hero = () => {
               size="lg"
               className="bg-accent hover:bg-accent/90 text-primary font-medium shadow-lift px-8 py-6 text-base"
             >
-              View My Work <ArrowRight className="ml-2" size={18} />
+              Recent Work <ArrowRight className="ml-2" size={18} />
             </Button>
             <a href="/Paul_CV.pdf" download className="inline-block">
               <Button

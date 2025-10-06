@@ -15,10 +15,7 @@ const Navbar = () => {
   }, []);
 
   const navItems = [
-    { label: "About", href: "#about" },
-    { label: "Skills", href: "#skills" },
-    { label: "Projects", href: "#projects" },
-    { label: "Contact", href: "#contact" },
+    { label: "Projects", href: "/projects" },
   ];
 
   return (
@@ -47,9 +44,11 @@ const Navbar = () => {
                 {item.label}
               </a>
             ))}
-            <Button className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-elegant">
-              Get in Touch
-            </Button>
+            <a href="#contact" className="inline-block">
+              <Button className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-elegant">
+                Contact
+              </Button>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -75,9 +74,11 @@ const Navbar = () => {
                 {item.label}
               </a>
             ))}
-            <Button className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-elegant w-full mt-2">
-              Get in Touch
-            </Button>
+            <a href="#contact" className="w-full inline-block">
+              <Button className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-elegant w-full mt-2">
+                Contact
+              </Button>
+            </a>
           </div>
         )}
       </div>
