@@ -36,7 +36,7 @@ const Projects = () => {
 
   return (
     <section id="projects" className="py-32 bg-secondary">
-      <div className="container mx-auto px-6 max-w-7xl">
+      <div className="container mx-auto px-6 max-w-3xl"> {/* 🟢 cambiado (más estrecho y centrado) */}
         <div className="text-center mb-20 animate-fade-in">
           <h2 className="text-5xl md:text-6xl font-serif font-semibold mb-6 text-foreground">Featured Projects</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -44,7 +44,8 @@ const Projects = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-10">
+        {/* 🔴 antes: <div className="grid md:grid-cols-2 gap-10"> */}
+        <div className="flex flex-col gap-10"> {/* 🟢 cambiado: vertical list */}
           {projects.map((project, index) => (
             <Card
               key={index}
