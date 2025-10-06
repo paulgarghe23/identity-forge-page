@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const Hero = () => {
@@ -29,10 +30,11 @@ const Hero = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-5 justify-center">
             <Button
+              asChild
               size="lg"
               className="bg-accent hover:bg-accent/90 text-primary font-medium shadow-lift px-8 py-6 text-base"
             >
-              Recent Work <ArrowRight className="ml-2" size={18} />
+              <Link to="/projects">Recent Work <ArrowRight className="ml-2" size={18} /></Link>
             </Button>
             <a href="/Paul_CV.pdf" download className="inline-block">
               <Button

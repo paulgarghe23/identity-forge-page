@@ -1,14 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Linkedin, Github, Twitter } from "lucide-react";
+import { Mail, Linkedin, Github } from "lucide-react";
 
 const Contact = () => {
   const socialLinks = [
     { icon: Mail, label: "Email", href: "mailto:your.email@example.com" },
     { icon: Linkedin, label: "LinkedIn", href: "#" },
     { icon: Github, label: "GitHub", href: "#" },
-    { icon: Twitter, label: "Twitter", href: "#" },
   ];
 
   return (

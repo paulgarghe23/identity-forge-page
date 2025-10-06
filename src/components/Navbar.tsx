@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -26,12 +27,12 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-6 py-5">
         <div className="flex items-center justify-between">
-          <a href="#hero" className="flex items-center gap-3 group">
+          <Link to="/" className="flex items-center gap-3 group">
             <div className="w-10 h-10 rounded-lg border-2 border-primary flex items-center justify-center group-hover:border-accent transition-smooth">
               <span className="text-sm font-sans font-medium text-primary group-hover:text-accent transition-smooth">PG</span>
             </div>
             <span className="text-lg font-serif font-semibold text-foreground hidden sm:block">Paul Garghe</span>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-10">
