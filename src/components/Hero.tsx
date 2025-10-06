@@ -21,12 +21,11 @@ const Hero = () => {
       {/* Content */}
       <div className="container mx-auto px-6 relative z-10 text-center">
         <div className="animate-fade-in max-w-4xl mx-auto">
-          <h1 className="text-6xl md:text-8xl font-serif font-semibold text-white mb-8 leading-tight tracking-tight">
-            Hi, I'm <span className="text-accent">Your Name</span>
+          <h1 className="text-6xl md:text-8xl font-serif font-semibold text-foreground mb-8 leading-tight tracking-tight">
+            Engineering <span className="text-accent">Clarity</span>
           </h1>
-          <p className="text-lg md:text-xl text-white/80 mb-12 max-w-2xl mx-auto leading-relaxed font-light">
-            A passionate professional crafting exceptional digital experiences
-            through innovative design and development
+          <p className="text-lg md:text-xl text-foreground/80 mb-12 max-w-2xl mx-auto leading-relaxed font-light">
+            Every action Matters
           </p>
           <div className="flex flex-col sm:flex-row gap-5 justify-center">
             <Button
@@ -35,13 +34,15 @@ const Hero = () => {
             >
               View My Work <ArrowRight className="ml-2" size={18} />
             </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="bg-white/5 text-white border-white/20 hover:bg-white/10 backdrop-blur-sm font-medium px-8 py-6 text-base"
-            >
-              Download Resume
-            </Button>
+            <a href="/Paul_CV.pdf" download className="inline-block">
+              <Button
+                size="lg"
+                variant="outline"
+                className="bg-white/5 text-foreground border-white/20 hover:bg-white/10 backdrop-blur-sm font-medium px-8 py-6 text-base"
+              >
+                Download Resume
+              </Button>
+            </a>
           </div>
         </div>
       </div>

@@ -31,9 +31,9 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           <a href="#hero" className="flex items-center gap-3 group">
             <div className="w-10 h-10 rounded-lg border-2 border-primary flex items-center justify-center group-hover:border-accent transition-smooth">
-              <span className="text-lg font-serif font-semibold text-primary group-hover:text-accent transition-smooth">YN</span>
+              <span className="text-sm font-sans font-medium text-primary group-hover:text-accent transition-smooth">PG</span>
             </div>
-            <span className="text-lg font-serif font-semibold text-foreground hidden sm:block">Your Name</span>
+            <span className="text-lg font-serif font-semibold text-foreground hidden sm:block">Paul Garghe</span>
           </a>
 
           {/* Desktop Navigation */}

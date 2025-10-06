@@ -42,7 +42,8 @@ All colors MUST be HSL.
     --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 20% 98%) 100%);
     --gradient-navy: linear-gradient(135deg, hsl(215 28% 17%) 0%, hsl(220 30% 25%) 100%);
     --gradient-accent: linear-gradient(135deg, hsl(40 80% 60%) 0%, hsl(45 85% 65%) 100%);
-    --gradient-hero-overlay: linear-gradient(135deg, hsl(215 28% 17% / 0.95) 0%, hsl(220 30% 25% / 0.92) 50%, hsl(215 25% 22% / 0.9) 100%);
+  /* very light marble-like overlay: soft almost-white base + subtle diagonal veins, no bright center */
+  --gradient-hero-overlay: linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(250,250,250,0.94) 100%), repeating-linear-gradient(135deg, rgba(0,0,0,0.02) 0px, rgba(0,0,0,0.02) 1px, transparent 2px, transparent 64px);
     
     --shadow-elegant: 0 4px 24px hsl(215 28% 17% / 0.08);
     --shadow-lift: 0 8px 32px hsl(215 28% 17% / 0.12);
