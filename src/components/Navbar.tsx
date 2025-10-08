@@ -8,30 +8,35 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = [
-    { label: "Projects", href: "/projects" },
-  ];
+  const navItems = [{ label: "Projects", href: "/projects" }];
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-smooth ${
         isScrolled ? "bg-background/95 backdrop-blur-md shadow-md" : "bg-transparent"
       }`}
+      aria-label="Primary"
     >
       <div className="container mx-auto px-6 py-5">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-lg border-2 border-primary flex items-center justify-center group-hover:border-accent transition-smooth">
-              <span className="text-sm font-sans font-medium text-primary group-hover:text-accent transition-smooth">PG</span>
-            </div>
-            <span className="text-lg font-serif font-semibold text-foreground hidden sm:block">Paul Garghe</span>
+          <Link to="/" className="flex items-center gap-3 group" aria-label="Go home">
+            {/* Logo con planta más grande (menos espacio blanco) */}
+            <div
+              className="w-11 h-11 rounded-lg border-2 border-primary overflow-hidden group-hover:border-accent transition-smooth bg-no-repeat bg-cover"
+              style={{
+                backgroundImage: 'url("/gold-growing-plant.png")',
+                backgroundPosition: "center 50%", // centrado verticalmente
+              }}
+              aria-label="Golden plant logo"
+            />
+            <span className="text-lg font-serif font-semibold text-foreground hidden sm:block">
+              Paul Garghe
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
