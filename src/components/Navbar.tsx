@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -25,12 +26,11 @@ const Navbar = () => {
       <div className="container mx-auto px-6 py-5">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3 group" aria-label="Go home">
-            {/* Logo con planta más grande (menos espacio blanco) */}
             <div
               className="w-11 h-11 rounded-lg border-2 border-primary overflow-hidden group-hover:border-accent transition-smooth bg-no-repeat bg-cover"
               style={{
                 backgroundImage: 'url("/gold-growing-plant.png")',
-                backgroundPosition: "center 50%", // centrado verticalmente
+                backgroundPosition: "center 50%",
               }}
               aria-label="Golden plant logo"
             />
@@ -50,11 +50,11 @@ const Navbar = () => {
                 {item.label}
               </a>
             ))}
-            <a href="#contact" className="inline-block">
+            <HashLink smooth to="/#contact" className="inline-block">
               <Button className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-elegant">
                 Contact
               </Button>
-            </a>
+            </HashLink>
           </div>
 
           {/* Mobile Menu Button */}
@@ -80,11 +80,16 @@ const Navbar = () => {
                 {item.label}
               </a>
             ))}
-            <a href="#contact" className="w-full inline-block">
+            <HashLink
+              smooth
+              to="/#contact"
+              className="w-full inline-block"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
               <Button className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-elegant w-full mt-2">
                 Contact
               </Button>
-            </a>
+            </HashLink>
           </div>
         )}
       </div>
