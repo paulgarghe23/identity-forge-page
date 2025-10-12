@@ -14,7 +14,7 @@ const Projects = () => {
     {
       title: "Identity Forge Page",
       description:
-        "Personal website built with React, Tailwind and Vercel — a live representation of my portfolio and projects.",
+        "Personal website built with React, Tailwind and Vercel.",
       tags: ["React", "Vite", "Tailwind", "Vercel"],
       github: "https://github.com/paulgarghe23/Identity-Forge-Page",
     },
