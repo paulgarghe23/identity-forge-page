@@ -21,6 +21,20 @@ const ChatWidget = () => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, open]);
 
+  // Mensaje inicial al abrir por primera vez
+  useEffect(() => {
+    if (open && messages.length === 0) {
+      setMessages([
+        {
+          id: crypto.randomUUID(),
+          role: "assistant",
+          content:
+            "Hello! I am Paul's AI agent, you can talk to me if you have a question about Paul's profile and I will answer if I can.\n\nSome examples of questions I can answer:\n• What is Paul doing right now?\n• Tell me about Paul's CV\n• Tell me about Paul's interests\n\nPlease note I am a beta version and don't have all context yet.",
+        },
+      ]);
+    }
+  }, [open]);
+
   const send = async () => {
     const text = input.trim();
     if (!text) return;
@@ -52,9 +66,20 @@ const ChatWidget = () => {
       <button
         onClick={() => setOpen((v) => !v)}
         aria-label="Abrir chat"
-        className="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full bg-primary text-primary-foreground shadow-xl hover:bg-primary/90 transition"
+        className="fixed bottom-6 right-6 z-50 h-14 rounded-full bg-primary text-primary-foreground shadow-xl hover:bg-primary/90 transition flex items-center gap-2 pl-2 pr-3"
       >
-        {open ? "×" : "IA"}
+        {open ? (
+          <span className="text-xl leading-none">×</span>
+        ) : (
+          <span className="flex items-center gap-2">
+            <img
+              src="/linkedIn-photo-4.png"
+              alt="AI Agent"
+              className="h-9 w-9 rounded-full object-cover"
+            />
+            <span className="text-sm font-medium">AI Agent</span>
+          </span>
+        )}
       </button>
 
       {open && (
@@ -74,7 +99,7 @@ const ChatWidget = () => {
                     : "bg-muted rounded-lg px-3 py-2 text-xs mr-8"
                 }
               >
-                {m.content}
+                <div className="whitespace-pre-wrap">{m.content}</div>
               </div>
             ))}
             <div ref={endRef} />
