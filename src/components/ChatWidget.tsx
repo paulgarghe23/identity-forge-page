@@ -74,7 +74,7 @@ const ChatWidget = () => {
           <span className="flex items-center gap-2">
             <img
               src="/linkedIn-photo-4.png"
-              alt="Paul's AI Agent"
+              alt="AI Agent"
               className="h-9 w-9 rounded-full object-cover"
             />
             <span className="text-sm font-medium">AI Agent</span>
@@ -84,7 +84,7 @@ const ChatWidget = () => {
 
       {open && (
         <Card className="fixed bottom-24 right-6 z-50 w-80 max-h-[70vh] flex flex-col shadow-2xl border-border">
-          <div className="p-3 border-b text-sm font-semibold">Agente IA</div>
+          <div className="p-3 border-b text-sm font-semibold">Paul's AI Agent</div>
 
           <div className="p-3 space-y-2 overflow-y-auto" style={{ maxHeight: "50vh" }}>
             {messages.length === 0 && (
