@@ -29,7 +29,7 @@ const ChatWidget = () => {
           id: crypto.randomUUID(),
           role: "assistant",
           content:
-            "Hello! I am Paul's AI agent, you can talk to me if you have a question about Paul's profile and I will answer if I can.\n\nSome examples of questions I can answer:\n• What is Paul doing right now?\n• Tell me about Paul's CV\n• Tell me about Paul's interests\n\nPlease note I am a beta version and don't have all context yet.",
+            "Hello! I am Paul's AI agent, you can talk to me if you have a question about Paul's profile and I will answer if I can.\n\nSome examples of questions I can answer:\n• What is Paul doing right now?\n• Tell me about Paul's CV\n• Tell me about Paul's interests\n\nPlease note I am a beta version and don't have all context yet. Please note the first message will take a few seconds to answer, servers loading!",
         },
       ]);
     }
@@ -74,7 +74,7 @@ const ChatWidget = () => {
           <span className="flex items-center gap-2">
             <img
               src="/linkedIn-photo-4.png"
-              alt="AI Agent"
+              alt="Paul's AI Agent"
               className="h-9 w-9 rounded-full object-cover"
             />
             <span className="text-sm font-medium">AI Agent</span>
