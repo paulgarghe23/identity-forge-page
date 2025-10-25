@@ -18,6 +18,13 @@ const Projects = () => {
       tags: ["React", "Vite", "Tailwind", "Vercel"],
       github: "https://github.com/paulgarghe23/Identity-Forge-Page",
     },
+    {
+      title: "Paul's AI Web Agent",
+      description:
+        "AI-powered web agent built with FastAPI and RAG for intelligent profile and projects Q&A using OpenAI embeddings.",
+      tags: ["Python", "FastAPI", "RAG", "OpenAI", "AI"],
+      github: "https://github.com/paulgarghe23/Web-agent",
+    },
   ];
 
   return (
