@@ -5,11 +5,11 @@ import { Github } from "lucide-react";
 const Projects = () => {
   const projects = [
     {
-      title: "Zepp Data LLM Analysis",
+      title: "Paul's AI Web Agent",
       description:
-        "Python-based data pipeline that extracts sleep data from Zepp/Mi Fit, exports it to CSV, and generates weekly AI reports.",
-      tags: ["Python", "API", "Automation", "LLM"],
-      github: "https://github.com/paulgarghe23/Zepp-data-LLM-analysis",
+        "AI-powered web agent built with FastAPI and RAG for intelligent profile and projects Q&A using OpenAI embeddings.",
+      tags: ["Python", "FastAPI", "RAG", "OpenAI", "AI"],
+      github: "https://github.com/paulgarghe23/Web-agent",
     },
     {
       title: "Identity Forge Page",
@@ -19,11 +19,11 @@ const Projects = () => {
       github: "https://github.com/paulgarghe23/Identity-Forge-Page",
     },
     {
-      title: "Paul's AI Web Agent",
+      title: "Zepp Data LLM Analysis",
       description:
-        "AI-powered web agent built with FastAPI and RAG for intelligent profile and projects Q&A using OpenAI embeddings.",
-      tags: ["Python", "FastAPI", "RAG", "OpenAI", "AI"],
-      github: "https://github.com/paulgarghe23/Web-agent",
+        "Python-based data pipeline that extracts sleep data from Zepp/Mi Fit, exports it to CSV, and generates weekly AI reports.",
+      tags: ["Python", "API", "Automation", "LLM"],
+      github: "https://github.com/paulgarghe23/Zepp-data-LLM-analysis",
     },
   ];
 
