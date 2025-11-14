@@ -10,6 +10,13 @@ interface Message {
   content: string;
 }
 
+const generateId = () => {
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+  return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+};
+
 const ChatWidget = () => {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
@@ -26,7 +33,7 @@ const ChatWidget = () => {
     if (open && messages.length === 0) {
       setMessages([
         {
-          id: crypto.randomUUID(),
+          id: generateId(),
           role: "assistant",
           content:
             "Hello! I am Paul's AI agent, you can talk to me if you have a question about Paul's profile and I will answer if I can.\n\nSome examples of questions I can answer:\n• What is Paul doing right now?\n• Tell me about Paul's CV\n• Tell me about Paul's interests\n\nPlease note I am a beta version and don't have all context yet.\nPlease note the first message will take a few seconds to answer as servers are loading.",
@@ -40,7 +47,7 @@ const ChatWidget = () => {
     if (!text) return;
     setInput("");
     
-    const userMsg: Message = { id: crypto.randomUUID(), role: "user", content: text };
+    const userMsg: Message = { id: generateId(), role: "user", content: text };
     setMessages((m) => [...m, userMsg]);
     setLoading(true);
     
@@ -58,7 +65,7 @@ const ChatWidget = () => {
       apiMessages.push({ type: "human", content: text });
       
       // Crear mensaje vacío del asistente para mostrar mientras llega el stream
-      const assistantMsgId = crypto.randomUUID();
+      const assistantMsgId = generateId();
       let assistantContent = "";
       
       setMessages((m) => [...m, { id: assistantMsgId, role: "assistant", content: "" }]);
@@ -80,7 +87,7 @@ const ChatWidget = () => {
       );
     } catch (e) {
       const errMsg: Message = { 
-        id: crypto.randomUUID(), 
+        id: generateId(), 
         role: "assistant", 
         content: "Error conectando con el agente." 
       };

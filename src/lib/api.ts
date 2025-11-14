@@ -65,68 +65,113 @@ export const streamMessages = async (
       throw new Error("No reader available");
     }
 
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
+    try {
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
 
-      // Decodificar el chunk y agregarlo al buffer
-      buffer += decoder.decode(value, { stream: true });
-      
-      // Procesar líneas completas (separadas por \n)
-      const lines = buffer.split('\n');
-      // Guardar la última línea incompleta en el buffer
-      buffer = lines.pop() || "";
+        // Decodificar el chunk y agregarlo al buffer
+        buffer += decoder.decode(value, { stream: true });
+        
+        // Procesar líneas completas (separadas por \n)
+        const lines = buffer.split('\n');
+        // Guardar la última línea incompleta en el buffer
+        buffer = lines.pop() || "";
 
-      // Procesar cada línea completa
-      for (const line of lines) {
-        const trimmedLine = line.trim();
-        if (!trimmedLine) continue;
+        // Procesar cada línea completa
+        for (const line of lines) {
+          const trimmedLine = line.trim();
+          if (!trimmedLine) continue;
 
-        try {
-          // Cada línea es un JSON completo
-          const data: AIMessageChunk = JSON.parse(trimmedLine);
-          
-          // Extraer el contenido del chunk
-          if (data.type === "AIMessageChunk" && data.content) {
+          try {
+            // Cada línea es un JSON completo
+            const data: any = JSON.parse(trimmedLine);
+            
+            // Extraer el contenido del chunk - manejar diferentes formatos
             let chunkContent = '';
-            if (typeof data.content === 'string') {
+            
+            // Formato 1: AIMessageChunk directo
+            if (data.type === "AIMessageChunk" && data.content) {
+              if (typeof data.content === 'string') {
+                chunkContent = data.content;
+              } else if (Array.isArray(data.content)) {
+                chunkContent = data.content.join('');
+              }
+            }
+            // Formato 2: Tupla (message, metadata) como en Streamlit
+            else if (Array.isArray(data) && data.length >= 1) {
+              const message = data[0];
+              if (message && typeof message === 'object') {
+                // Si es un objeto con type y content
+                if (message.type === "AIMessageChunk" && message.content) {
+                  if (typeof message.content === 'string') {
+                    chunkContent = message.content;
+                  } else if (Array.isArray(message.content)) {
+                    chunkContent = message.content.join('');
+                  }
+                }
+                // Si tiene content directamente
+                else if (message.content && typeof message.content === 'string') {
+                  chunkContent = message.content;
+                }
+                // Si es un objeto con kwargs (constructor)
+                else if (message.kwargs && message.kwargs.content) {
+                  const content = message.kwargs.content;
+                  if (typeof content === 'string') {
+                    chunkContent = content;
+                  } else if (Array.isArray(content)) {
+                    chunkContent = content.join('');
+                  }
+                }
+              }
+            }
+            // Formato 3: Objeto con content directamente
+            else if (data.content && typeof data.content === 'string') {
               chunkContent = data.content;
-            } else if (Array.isArray(data.content)) {
-              chunkContent = data.content.join('');
             }
             
             if (chunkContent) {
               fullContent += chunkContent;
               onChunk(chunkContent);
             }
+          } catch (e) {
+            // Si no es JSON válido, ignorar la línea
+            console.warn('Failed to parse SSE line:', trimmedLine, e);
           }
-        } catch (e) {
-          // Si no es JSON válido, ignorar la línea
-          console.warn('Failed to parse SSE line:', trimmedLine, e);
         }
       }
-    }
 
-    // Procesar cualquier línea restante en el buffer
-    if (buffer.trim()) {
-      try {
-        const data: AIMessageChunk = JSON.parse(buffer.trim());
-        if (data.type === "AIMessageChunk" && data.content) {
+      // Procesar cualquier línea restante en el buffer
+      if (buffer.trim()) {
+        try {
+          const data: any = JSON.parse(buffer.trim());
           let chunkContent = '';
-          if (typeof data.content === 'string') {
+          
+          if (data.type === "AIMessageChunk" && data.content) {
+            if (typeof data.content === 'string') {
+              chunkContent = data.content;
+            } else if (Array.isArray(data.content)) {
+              chunkContent = data.content.join('');
+            }
+          } else if (data.content && typeof data.content === 'string') {
             chunkContent = data.content;
-          } else if (Array.isArray(data.content)) {
-            chunkContent = data.content.join('');
           }
           
           if (chunkContent) {
             fullContent += chunkContent;
             onChunk(chunkContent);
           }
+        } catch (e) {
+          console.warn('Failed to parse final buffer:', buffer, e);
         }
-      } catch (e) {
-        console.warn('Failed to parse final buffer:', buffer, e);
       }
+    } catch (streamError) {
+      // Si hay un error en el stream pero ya tenemos contenido, devolverlo
+      if (fullContent) {
+        console.warn('Stream error but returning partial content:', streamError);
+        return fullContent;
+      }
+      throw streamError;
     }
 
     return fullContent;
