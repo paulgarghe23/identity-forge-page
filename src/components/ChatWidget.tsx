@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { askQuestion } from "@/lib/api";
+import { streamMessages, HumanMessage, AIMessage } from "@/lib/api";
 
 interface Message {
   id: string;
@@ -39,15 +39,51 @@ const ChatWidget = () => {
     const text = input.trim();
     if (!text) return;
     setInput("");
+    
     const userMsg: Message = { id: crypto.randomUUID(), role: "user", content: text };
     setMessages((m) => [...m, userMsg]);
     setLoading(true);
+    
     try {
-      const answer = await askQuestion(text);
-      const botMsg: Message = { id: crypto.randomUUID(), role: "assistant", content: answer };
-      setMessages((m) => [...m, botMsg]);
+      // Convertir mensajes al formato de la API
+      // Excluir el mensaje inicial del sistema si es el primer mensaje del asistente
+      const apiMessages: (HumanMessage | AIMessage)[] = messages
+        .filter((m, idx) => !(idx === 0 && m.role === "assistant")) // Excluir primer mensaje si es del asistente (mensaje inicial)
+        .map((m): HumanMessage | AIMessage => ({
+          type: m.role === "user" ? "human" : "ai",
+          content: m.content,
+        }));
+      
+      // Agregar el nuevo mensaje del usuario
+      apiMessages.push({ type: "human", content: text });
+      
+      // Crear mensaje vacío del asistente para mostrar mientras llega el stream
+      const assistantMsgId = crypto.randomUUID();
+      let assistantContent = "";
+      
+      setMessages((m) => [...m, { id: assistantMsgId, role: "assistant", content: "" }]);
+      
+      // Stream de mensajes
+      await streamMessages(
+        apiMessages,
+        (chunk) => {
+          assistantContent += chunk;
+          // Actualizar el mensaje del asistente con el contenido acumulado
+          setMessages((m) =>
+            m.map((msg) =>
+              msg.id === assistantMsgId
+                ? { ...msg, content: assistantContent }
+                : msg
+            )
+          );
+        }
+      );
     } catch (e) {
-      const errMsg: Message = { id: crypto.randomUUID(), role: "assistant", content: "Error conectando con el agente." };
+      const errMsg: Message = { 
+        id: crypto.randomUUID(), 
+        role: "assistant", 
+        content: "Error conectando con el agente." 
+      };
       setMessages((m) => [...m, errMsg]);
     } finally {
       setLoading(false);
