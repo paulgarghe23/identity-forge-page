@@ -18,11 +18,32 @@ const generateId = () => {
 };
 
 const ChatWidget = () => {
-  const [open, setOpen] = useState(false);
+  // Inicializar desde sessionStorage (se borra al cerrar pestaña)
+  const [open, setOpen] = useState(() => {
+    const saved = sessionStorage.getItem('chatWidgetOpen');
+    return saved === 'true';
+  });
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>(() => {
+    try {
+      const saved = sessionStorage.getItem('chatWidgetMessages');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
   const [loading, setLoading] = useState(false);
   const endRef = useRef<HTMLDivElement | null>(null);
+
+  // Guardar estado open en sessionStorage cuando cambie
+  useEffect(() => {
+    sessionStorage.setItem('chatWidgetOpen', open.toString());
+  }, [open]);
+
+  // Guardar mensajes en sessionStorage cuando cambien
+  useEffect(() => {
+    sessionStorage.setItem('chatWidgetMessages', JSON.stringify(messages));
+  }, [messages]);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
