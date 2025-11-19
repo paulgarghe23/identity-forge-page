@@ -1,4 +1,7 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL ?? "https://agent.paulgarghe.com";
+// Detección automática: en desarrollo usa localhost, en producción usa la URL de producción
+// Puedes override con VITE_DEV_BACKEND_URL si es necesario
+const API_BASE_URL = import.meta.env.VITE_DEV_BACKEND_URL 
+  ?? (import.meta.env.DEV ? "http://localhost:8000" : "https://agent.paulgarghe.com");
 
 export interface HumanMessage {
   type: "human";
